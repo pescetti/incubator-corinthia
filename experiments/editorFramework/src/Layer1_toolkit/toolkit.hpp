@@ -101,23 +101,17 @@ class toolkit
     */
 
 public:
-    // class is a singleton, so the constructor will only be called when starting the application
-    virtual toolkit() {}
-
-    // class is a singleton, so the destructor will only be called when terminating the application
-    virtual ~toolkit() {}
-
     // Create instance
     static const int DEBUG_INFO;
     static const int DEBUG_WARNING;
     static const int DEBUG_DEBUG;
     static const int DEBUG_ERROR;
-    static toolkit *createInstance(toolkit_class& callback, int debugLevel);
+    static toolkit *createInstance(toolkit_callback& callback, int debugLevel);
 
     // Start windows etc
-    virtual startWindow() = 0;
+    virtual bool startWindow() = 0;
 
     // Start Javascript
-    virtual callJavascript(const char *function) = 0;
+    virtual bool callJavascript(const char *function) = 0;
 };
 

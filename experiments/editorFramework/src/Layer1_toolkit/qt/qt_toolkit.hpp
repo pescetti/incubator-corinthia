@@ -16,5 +16,22 @@
 // under the License.
 
 #pragma once
-#include "qt_toolkit.h"
+#include "../toolkit.hpp"
+
+/*
+ * Implementation of toolkit generic interface in Qt
+ *
+ */
+
+
+class qt_toolkit : toolkit
+{
+    /* toolkit qt implementation */
+
+public:
+
+private: 
+    QApplication *app;
+    MainWindow   *window;
+};
 
