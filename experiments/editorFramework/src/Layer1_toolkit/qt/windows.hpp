@@ -16,7 +16,33 @@
 // under the License.
 
 #pragma once
-#include <QtWidgets/QApplication>
-#include "windows.hpp"
-#include "qt_toolkit.hpp"
 
+/******************** WINDOWS.HPP ********************
+ * This file contain all the graphical classes 
+ * inherited from Qt
+ */
+
+#include <QtWidgets/QWidget>
+
+
+
+class MainWindow : public QWidget
+{
+    Q_OBJECT
+public:
+    MainWindow(QApplication *app);
+    virtual ~MainWindow();
+    public slots:
+    void insertTable();
+    void insertLink();
+    void insertCharacter();
+    void backspace();
+    void moveLeft();
+    void moveRight();
+    void undo();
+    void redo();
+private:
+    QApplication *_app;
+//    Toolbar *_toolbar;
+//    Editor *_editor;
+};
