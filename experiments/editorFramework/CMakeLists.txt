@@ -78,11 +78,39 @@ set(SOURCES_JS_elementtypes
     src/Layer0_Javascript/elementtypes/elements.txt
    )
 
+
+
+###
+## group Qt implementation defined toolkit
+###
+set(SOURCES_TOOLKIT_QT
+    src/Layer1_toolkit/qt/qt_toolkit.c
+    src/Layer1_toolkit/qt/qt_toolkit.h)
+
+
+
+###
+## group Web implementation defined toolkit
+###
+set(SOURCES_TOOLKIT_WEB
+   )
+
+
+
 ###
 ## group source objects
 ###
+if(${EDITOR_TOOLKIT} MATCHES "Web")
+    set (SOURCES_TK ${SOURCES_TOOLKIT_WEB})
+else()
+    set (SOURCES_TK ${SOURCES_TOOLKIT_QT})
+endif(${EDITOR_TOOLKIT} MATCHES "Web")
+
 set(SOURCES
-    src/main.c)
+    src/Layer1_toolkit/toolkit.h
+    src/Layer1_toolkit/Layer1_interface.h
+    ${SOURCES_TK}
+   )
 
 
 
@@ -91,12 +119,6 @@ set(SOURCES
 ###
 include_directories()
 include_directories(SYSTEM ${INCLUDE_DIRS})
-include_directories(.)
-include_directories(SYSTEM ../../../DocFormats/api/headers)
-include_directories(../../../DocFormats/headers)
-include_directories(../../../DocFormats/core/src/lib)
-include_directories(../../../DocFormats/unittest)
-link_directories(${LIB_DIRS})
 
 
 
@@ -106,10 +128,12 @@ link_directories(${LIB_DIRS})
 add_executable(corinthia ${SOURCES})
 target_link_libraries(corinthia DocFormats ${LIBS})
 source_group(src FILES ${SOURCES})
+source_group(src\\toolkit_qt FILES ${SOURCES_TOOLKIT_QT})
+source_group(src\\toolkit_web FILES ${SOURCES_TOOLKIT_WEB})
 
-source_group(javascript FILES ${SOURCES_JS})
-source_group(javascript/3rdparty FILES ${SOURCES_JS_3rdparty})
-source_group(javascript/dtdsource FILES ${SOURCES_JS_dtdsource})
-source_group(javascript/elementtypes FILES ${SOURCES_JS_elementtypes})
+source_group(src\\javascript FILES ${SOURCES_JS})
+source_group(src\\javascript\\3rdparty FILES ${SOURCES_JS_3rdparty})
+source_group(src\\javascript\\dtdsource FILES ${SOURCES_JS_dtdsource})
+source_group(src\\javascript\\elementtypes FILES ${SOURCES_JS_elementtypes})
 
 set_property(TARGET corinthia PROPERTY FOLDER consumers)

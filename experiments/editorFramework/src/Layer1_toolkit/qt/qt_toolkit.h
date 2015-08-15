@@ -29,5 +29,9 @@ class qt_toolkit : toolkit
     /* toolkit qt implementation */
 
 public:
+
+private: 
+    QApplication *app;
+    MainWindow   *window;
 };
 
